@@ -5,3 +5,8 @@ names=['jayed','rakib','mukter']
 
 for n in names:
     print(n)
+
+name="Showkatul islam"
+
+for j in name:
+    print(j)
