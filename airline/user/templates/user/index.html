@@ -1,0 +1,6 @@
+{% extends 'user/base.html' %}
+
+{% block body %}
+<h1 class="mt-5 alert alert-primary">Welcome :{{request.user.username}}</h1>
+<a href="{% url 'logout' %}"> logout</a>
+{% endblock  %}
