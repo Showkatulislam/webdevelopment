@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <!--Owl Carousel CSS-->
+        <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    
+        <!--FontAwesome CSS-->
+        <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    
+        <!--Custom CSSfixed-top-->
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+    
+        {% block scripts %}
+        {% endblock scripts %}
+        <title>SDP-1 Project | {% block title %} {% endblock title %} </title>
+      </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-secondary ">
+              <div class="container">
+                  <a class="navbar-brand" href="/"><img src="{% static 'images/img1/logo.png' %}" alt="" style="width: 70px;"></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                          <li class="nav-item">
+                              <a class="nav-link fw-bold text-info bt-edit active" aria-current="page" href="/">HOME</a>
+                          </li>
+                          {% block second %}
+                          {% endblock second %}
+                          <li class="nav-item dropdown mx-2">
+                                <a class="nav-link dropdown-toggle text-white fw-bold bt-edit" href="#" id="fashionDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  Food
+                                </a>
+                              <ul class="dropdown-menu bg-light" aria-labelledby="fashionDropdown" >
+                                  <li><a class="dropdown-item" href="#">Cheaper Food</a></li>
+                                  <li><a class="dropdown-item" href="#">Costly Food</a></li>
+                              </ul>
+                          </li>
+                      </ul>
+                      {% block input %}
+                      {% endblock input %}
+                      <div>
+                      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                          <li class="nav-item mx-2">
+                              <a href="#" class="nav-link text-white"><span class="badge bg-primary">4</span><i class="text-warning fas fa-cart-plus fa-2x"></i> </a>
+                          </li>
+                          {% if request.user.is_authenticated %}
+                          <li class="nav-item dropdown mx-2">
+                                <a class="nav-link text-white fw-bold" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                     <i class="icon-text fas fa-user fa-2x"></i>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                                      <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
+                                      <li><a class="dropdown-item" href="#">Orders</a></li>
+                                      <li><a class="dropdown-item" href="{% url 'passwordchange' %}">Change Password</a></li>
+                                      <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                                </ul>
+                            </li>
+                              {% else %}
+                              <li class="nav-item mx-2">
+                                 <a href="{% url 'login' %}" class="nav-link text-white fw-bold bt-edit">Login</a>
+                              </li>
+                              <li class="nav-item mx-2">
+                                  <a href="{% url 'registation' %}" class="nav-link text-white fw-bold bt1-edit">Registration</a>
+                              </li>
+                              {% endif %}
+                      </ul>
+                      </div>
+                  </div>
+              </div>
+           </nav>
+        {% block banner_slider %} {% endblock banner_slider %}
+        {% block livesale %} {% endblock livesale %}
+        {% block main-content %} {% endblock main-content %}
+        {% block contact-content %} {% endblock contact-content %}
+        {% block topresturant %} {% endblock topresturant %}
+        {% block resturant %} {% endblock resturant %}
+        <footer class="container-fluid bg-dark text-center p-2 mt-5">
+          <div class="row text-white">
+              <div class="col-lg-6">
+                <small class="text-white">Copyright &copy; 2021 || Designed By team-1|| </small>
+              </div>
+              <div class="col-lg-6 text-center text-lg-right">
+                  <a href="#">Home</a>
+                  <a href="#"><i class="fab fa-facebook"></i></a>
+                  <a href="#"><i class="fab fa-youtube"></i></a>
+                  <a href="#"><i class="fab fa-instagram"></i></a>
+                  <a href="#"><i class="fab fa-twitter"></i></a>
+              </div>
+          </div>
+      </footer>
+    <script src="{% static 'main.js' %}" defer></script>
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/all.min.js' %}"></script>
+    <script src="{% static 'js/myscript.js' %}"></script>
+    </body>
+</html>

@@ -1,0 +1,30 @@
+.rest-name{
+    margin-left: 3px;
+    width: 300px;
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+
+}
+.navtext{
+    font-weight: bolder;
+}
+.bt1-edit{
+    display: inline-block;
+    width: 160px;
+    text-align: center;
+    border: 1px solid wheat;
+    border-radius:10px;
+    box-shadow: 0 6 6 0 white;
+    margin-left: 4px;
+}
+.bt1-edit:hover,
+.bt1-edit:active{
+    width: 160px;
+    text-align: center;
+    display: block;
+    border-radius: 10px;
+    color: #000;
+    background-color:rgba(4, 0, 0, 0.2);
+    border: 1px solid whitesmoke;
+}

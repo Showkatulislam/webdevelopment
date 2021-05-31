@@ -1,0 +1,102 @@
+html{
+    scroll-behavior: smooth;
+}
+.owl-carousel .item{
+    font-size: 24px;
+    text-align: center;
+    margin-top: 20px;;
+   }
+   
+.owl-next{
+    float:right;
+   }
+.owl-prev{
+    float:left;
+   }
+.owl-prev span{
+    font-size: 24px;
+    font-weight: bold;
+   }
+.owl-next span{
+    font-size: 24px;
+    font-weight: bold;
+   }
+.ok{
+    color: red;
+}
+
+.search:focus{
+    background-color: #e8e8e8;
+}
+
+.not-visible{
+    display: none;
+}
+
+.results-card{
+    width: 280px;
+    box-shadow:0 8px 8px 0 rgba(0, 0, 0, 0.4);
+    transition: 0.5s;
+    border-radius: 7px;
+    padding: 15px 15px;
+    margin: 0 auto;
+}
+
+.item{
+    text-decoration: none;
+}
+.game-img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.text{
+    color: white;
+    text-align: center;
+}
+.pro-edit{
+    width: 100px;
+    height: 100px;
+    background-color: red;
+}
+.icon-text{
+    color: palegoldenrod;
+}
+.control-name{
+    text-align: center;
+}
+.bt-edit{
+    width: 90px;
+    text-align: center;
+    border: 1px solid wheat;
+    border-radius:10px;
+    box-shadow: 0 6 6 0 white;
+}
+.bt-edit:hover,
+.bt-edit:active{
+    width: 90px;
+    text-align: center;
+    display: block;
+    border-radius: 10px;
+    color: #000;
+    background-color:rgba(4, 0, 0, 0.2);
+    border: 1px solid whitesmoke;
+}
+.bt1-edit{
+    width: 110px;
+    text-align: center;
+    border: 1px solid wheat;
+    border-radius:10px;
+    box-shadow: 0 6 6 0 white;
+}
+.bt1-edit:hover,
+.bt1-edit:active{
+    width: 110px;
+    text-align: center;
+    display: block;
+    border-radius: 10px;
+    color: #000;
+    background-color:rgba(4, 0, 0, 0.2);
+    border: 1px solid whitesmoke;
+}
+
