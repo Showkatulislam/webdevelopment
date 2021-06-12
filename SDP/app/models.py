@@ -1,6 +1,8 @@
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.fields import CharField
+from django.db.models.fields.related import ForeignKey
 # Create your models here.
 
 
@@ -54,6 +56,11 @@ class Customer(models.Model):
 
 
 CATEGORY_CHOICES=(
+    ('Bf','Beaf_fry'),
+    ('Fi','Fish'),
+    ('Ch','Chicken'),
+    ('C','chamuca'),
+    ('B','Biryani'),
     ('P','Paratha'),
     ('KB','Kachchi Biryani'),
     ('BK','Bhuna Khichuri'),
@@ -79,5 +86,37 @@ class ResFood(models.Model):
     category=models.CharField(choices=CATEGORY_CHOICES,max_length=2)
     food_image=models.ImageField(upload_to='Food_image')
     def __str__(self) -> str:
-        return str(self.restaurent_id)
+        return str(f"{self.restaurent_id} {self.id} {self.food_title}")
+
+class Cart(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    food=models.ForeignKey(ResFood,on_delete=models.CASCADE)
+    quantity=models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        return str(f"{self.user} {self.id}")
+    @property
+    def total_cost(self):
+        return self.quantity*self.food.food_price
+STATUS_CHOICES=(
+    ('Accepted','Accepted'),
+    ('Packed','Packed'),
+    ('On The Way','On The Way'),
+    ('Delivered','Delivered'),
+    ('Cancel','Cancel'),
+)
+
+class OrderPlaced(models.Model):
+    resturant_id=ForeignKey(Restaurant,on_delete=models.CASCADE)
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    customer=models.ForeignKey(Customer,on_delete=models.CASCADE)
+    food=models.ForeignKey(ResFood,on_delete=models.CASCADE)
+    quantity=models.PositiveIntegerField(default=1)
+    ordered_date=models.DateTimeField(auto_now_add=True)
+    status=models.CharField(max_length=50,
+    choices=STATUS_CHOICES,default='Pendeing')
+    @property
+    def total_cost(self):
+        return self.quantity*self.food.food_price
+
 

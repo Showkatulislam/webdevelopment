@@ -1,11 +1,15 @@
+import json
 from django import forms
-from django.http.response import HttpResponseRedirect
-from django.shortcuts import render,HttpResponseRedirect
+from django.http.response import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render,HttpResponseRedirect,redirect
 from django.http import JsonResponse
-from .models import Restaurant,Bannerslide,Customer,ResFood
+from .models import Cart, Restaurant,Bannerslide,Customer,ResFood,OrderPlaced
 from django.views import View
 from .form import customerregistration,CustomerProfileForm
 from django.contrib import messages
+from django.db.models import Q
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 # Create your views here.
 
 
@@ -13,6 +17,9 @@ from django.contrib import messages
 def home(request):
     rest=Restaurant.objects.all()
     return render(request,'home.html',{'rest':rest})
+def order(request):
+    of=OrderPlaced.objects.filter(user=request.user)
+    return render(request,'order.html',{'order':of})
 
 
 ####This is Section for Customer registration view ###########
@@ -35,17 +42,19 @@ def Profile(request):
 
 ####This is Section for Restaurent View Table###########
 def Restaurent_detail_view(request,pk):
-    nam=Restaurant.objects.filter(restaurant_id__icontains=pk)
-    rest=nam[0].name
+    # nam=Restaurant.objects.filter(restaurant_id__icontains=pk)
+    # rest=nam[0].name
+    nam=Restaurant.objects.get(restaurant_id=pk)
+    rest=nam
     banner=Bannerslide.objects.filter(restaurant_id__icontains=pk)
     ban=Bannerslide.objects.filter(restaurant_id__icontains=101)
     id=Restaurant.objects.get(restaurant_id__icontains=pk)
     food=ResFood.objects.filter(restaurent_id=id)
-    if banner==0:
+    if banner:
         bn1=banner[0]
         bn2=banner[1]
         bn3=banner[2]
-        return render(request,'Restaurent_view.html',{'bn1':bn1,'bn2':bn2,'bn3':bn3,'rest':rest,'food':food})
+        return render(request,'Restaurent_view.html',{'bn1':bn1,'bn2':bn2,'bn3':bn3,'rest':rest.name,'food':food})
     else:
         bn1=ban[0]
         bn2=ban[1]
@@ -76,6 +85,7 @@ def search_results(request):
     return JsonResponse({})
 
 ####This is Section for Customer Address view Table###########
+@method_decorator(login_required,name='dispatch')
 class ProfileView(View):
      def get(self,request):
          form=CustomerProfileForm()
@@ -102,20 +112,68 @@ def address(request):
         add=''
         return render(request,'address.html',{'add':add,'active':'btn-info'})
 
-
-def FoodAbout(request):
-    return render(request,'food_about.html')
+# def FoodAbout(request):
+#     return render(request,'food_about.html')
 
 def AddCart(request):
-    return render(request,'add_cart.html')
+    user=request.user
+    id=request.GET.get('food_id')
+    food=ResFood.objects.get(id=id)
+    cart=Cart.objects.filter()
+    Cart(user=user,food=food).save()
+    return redirect('/cart')
 
+
+@login_required
+def show_cart(request):
+    if request.user.is_authenticated:
+        user=request.user
+        cart=Cart.objects.filter(user=user)
+        amount=0.0
+        shipping_amount=40.
+        total_amount=0
+        cart_food=[f for f in Cart.objects.all() if f.user==user]
+        if cart_food:
+            for f in cart_food:
+              tempamount=(f.quantity*f.food.food_price)
+              amount+=tempamount
+              total_amount=amount+shipping_amount
+        return render(request,'add_cart.html',{'cart':cart,'totalamount':total_amount,'amount':amount})
+    else:
+        return render(request,'add_cart.html')
+
+@login_required
 def checkout(request):
     if request.user.is_authenticated:
         add=Customer.objects.filter(user=request.user)
-        return render(request, 'checkout.html',{'add':add})
+        cart_items=Cart.objects.filter(user=request.user)
+        amount=0.0
+        shipping_amount=40.0
+        total_amount=0.0
+        cart_food=[f for f in Cart.objects.all() if f.user==request.user]
+        if cart_food:
+            for f in cart_food:
+                tempamount=(f.quantity*f.food.food_price)
+                amount+=tempamount
+            total_amount=amount+shipping_amount
+        return render(request, 'checkout.html',{'add':add,'cartitem':cart_items,'total_amount':total_amount})
     else:
         add=''
         return render(request, 'checkout.html',{'add':add})
+
+
+login_required(login_url='login')
+def payment_done(request):
+    user=request.user
+    custid=request.GET.get('custid')
+    customer=Customer.objects.get(id=custid)
+    cart=Cart.objects.filter(user=user)
+    print(cart)
+    for c in cart:
+        OrderPlaced(resturant_id=c.food.restaurent_id,user=user,customer=customer,food=c.food,quantity=c.quantity).save()
+        c.delete()
+    return redirect('orders')
+    
 
 
 def foodview(request,pk):
@@ -135,3 +193,92 @@ def foodCategory(request,data):
     elif data=='RC':
         food=ResFood.objects.filter(category='RC')
     return render(request,'food_category.html',{'food':food})
+
+
+class ProductViewDetail(View):
+    def get(self,request,pk):
+        product=ResFood.objects.get(pk=pk)
+        return render(request,'food_about.html',{'food':product})
+
+
+def plus_cart(request):
+    if request.method=='GET': 
+        food_id=request.GET['prod_id']
+        print(food_id )
+        user=request.user
+        c=Cart.objects.get(Q(food=food_id) & Q(user=user))
+        c.quantity+=1
+        c.save()
+        amount=0.0
+        total_amount=0
+        shipping_amount=40.
+        cart_food=[f for f in Cart.objects.all() if f.user==user]
+        for f in cart_food:
+            tempamount=(f.quantity*f.food.food_price)
+            amount+=tempamount
+            total_amount=amount+shipping_amount
+            data={
+                  'quantity':c.quantity,
+                  'amount':amount,
+                  'tototamount':total_amount
+              }
+    return JsonResponse(data)
+
+
+def minus_cart(request):
+    if request.method=='GET': 
+        food_id=request.GET['prod_id']
+        print(food_id )
+        user=request.user
+        c=Cart.objects.get(Q(food=food_id) & Q(user=user))
+        c.quantity-=1
+        c.save()
+        amount=0.0
+        total_amount=0
+        shipping_amount=40.
+        cart_food=[f for f in Cart.objects.all() if f.user==user]
+        for f in cart_food:
+            tempamount=(f.quantity*f.food.food_price)
+            amount+=tempamount
+            total_amount=amount+shipping_amount
+            data={
+                  'quantity':c.quantity,
+                  'amount':amount,
+                  'tototamount':total_amount
+              }
+    return JsonResponse(data)
+
+def remove_cart(request):
+    if request.method=='GET':
+        food_id=request.GET['prod_id']
+        user=request.user
+        c=Cart.objects.get(Q(food=food_id) & Q(user=user))
+        c.delete()
+        amount=0.0
+        total_amount=0
+        shipping_amount=40.
+        cart_food=[f for f in Cart.objects.all() if f.user==user]
+        for f in cart_food:
+            tempamount=(f.quantity*f.food.food_price)
+            amount+=tempamount
+            data={
+                  'amount':amount,
+                  'tototamount':amount+shipping_amount
+              }
+    return JsonResponse(data)
+
+
+def Food(request):
+    B=ResFood.objects.filter(category='B')
+    Fi=ResFood.objects.filter(category='Fi')
+    Ch=ResFood.objects.filter(category='Ch')
+    C=ResFood.objects.filter(category='C')
+
+    context={
+        'B':B,
+        'Fi':Fi,
+        'Ch':Ch,
+        'C':C,
+    }
+    return render(request,'food.html',context)
+

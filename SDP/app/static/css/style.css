@@ -85,8 +85,6 @@ html{
 .bt1-edit{
     width: 110px;
     text-align: center;
-    border: 1px solid wheat;
-    border-radius:10px;
     box-shadow: 0 6 6 0 white;
 }
 .bt1-edit:hover,

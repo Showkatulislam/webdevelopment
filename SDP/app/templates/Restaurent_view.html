@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block scripts %}
-<link rel="stylesheet" href="{% static 'rest.css' %}">
+<link rel="stylesheet" href="{% static 'css/rest.css' %}">
 {% endblock scripts %}
 {% block title %}Home{% endblock title %}
 {% block second %}
@@ -68,7 +68,9 @@
  <!-- Slider 1 -->
  <div class="owl-carousel" id="slider1">
    {% for fb in food %}
+   <a href="{% url 'product-detail' fb.id %}" class="btn">
   <div class="item rounded"><img src="{{fb.food_image.url}}" alt="" height="200px"><span class="fw-bold">{{fb.food_title}}</span><br><span class="fs-5">{{fb.food_price}}</span></div>
+</a>
   {% endfor %}
  </div>
 </div>
@@ -82,7 +84,9 @@
   <!-- Slider 1 -->
   <div class="owl-carousel" id="slider1">
     {% for fb in food %}
+    <a href="{% url 'product-detail' fb.id %}" class="btn">
     <div class="item rounded"><img src="{{fb.food_image.url}}" alt="" height="200px"><span class="fw-bold">{{fb.food_title}}</span><br><span class="fs-5">{{fb.food_price}}</span></div>
+   </a>
     {% endfor %}
   </div>
  </div>

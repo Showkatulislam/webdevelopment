@@ -10,12 +10,12 @@
         <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
         <!--Owl Carousel CSS-->
         <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
-    
+
         <!--FontAwesome CSS-->
         <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
-    
-        <!--Custom CSSfixed-top-->
-        <link rel="stylesheet" href="{% static 'style.css' %}">
+
+        <!--Custom CSS-->
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
     
         {% block scripts %}
         {% endblock scripts %}
@@ -40,8 +40,7 @@
                                   Food
                                 </a>
                               <ul class="dropdown-menu bg-light" aria-labelledby="fashionDropdown" >
-                                  <li><a class="dropdown-item" href="#">Cheaper Food</a></li>
-                                  <li><a class="dropdown-item" href="#">Costly Food</a></li>
+                                  <li><a class="dropdown-item" href="{% url 'foodview' %}"> Food</a></li>
                               </ul>
                           </li>
                       </ul>
@@ -50,7 +49,7 @@
                       <div>
                       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                           <li class="nav-item mx-2">
-                              <a href="#" class="nav-link text-white"><span class="badge bg-primary">4</span><i class="text-warning fas fa-cart-plus fa-2x"></i> </a>
+                              <a href="{% url 'showcart' %}" class="nav-link text-white"><span class="badge bg-primary">4</span><i class="text-warning fas fa-cart-plus fa-2x"></i> </a>
                           </li>
                           {% if request.user.is_authenticated %}
                           <li class="nav-item dropdown mx-2">
@@ -59,7 +58,7 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="profileDropdown">
                                       <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
-                                      <li><a class="dropdown-item" href="#">Orders</a></li>
+                                      <li><a class="dropdown-item" href="{% url 'orders' %}">Orders</a></li>
                                       <li><a class="dropdown-item" href="{% url 'passwordchange' %}">Change Password</a></li>
                                       <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
                                 </ul>
@@ -83,21 +82,22 @@
         {% block contact-content %} {% endblock contact-content %}
         {% block topresturant %} {% endblock topresturant %}
         {% block resturant %} {% endblock resturant %}
+        {% block pgetway %} {% endblock pgetway %}
         <footer class="container-fluid bg-dark text-center p-2 mt-5">
           <div class="row text-white">
               <div class="col-lg-6">
                 <small class="text-white">Copyright &copy; 2021 || Designed By team-1|| </small>
               </div>
-              <div class="col-lg-6 text-center text-lg-right">
-                  <a href="#">Home</a>
-                  <a href="#"><i class="fab fa-facebook"></i></a>
-                  <a href="#"><i class="fab fa-youtube"></i></a>
-                  <a href="#"><i class="fab fa-instagram"></i></a>
-                  <a href="#"><i class="fab fa-twitter"></i></a>
+              <div class="col-lg-6 text-center text-lg-right ">
+                  <a href="#" class="text-white mx-1">Home</a>
+                  <a href="#"><i class="text-white fab fa-facebook mx-1"></i></a>
+                  <a href="#"><i class="text-white fab fa-youtube mx-1"></i></a>
+                  <a href="#"><i class=" text-white fab fa-instagram mx-1"></i></a>
+                  <a href="#"><i class="text-white fab fa-twitter mx-1"></i></a>
               </div>
           </div>
       </footer>
-    <script src="{% static 'main.js' %}" defer></script>
+    <script src="{% static 'js/main.js' %}" defer></script>
     <script src="{% static 'js/jquery.js' %}"></script>
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'js/owl.carousel.min.js' %}"></script>

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Order{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+   <div class="row">
+       <h1>Welcome <span>{{request.user}}</span></h1>
+       <div class="col-sm-3 border-end">
+           <ul class="list-unstyled">
+               <li class="d-grid"><a class="btn btn-primary" href="">Orders</a></li>
+           </ul>
+       </div>
+
+       <div class="col-sm-9 offser-sm-1">
+           {% for fd in order %}
+           <div class="row shadow-sm mb-3">
+               <div class="col-sm-2">
+                <img src="{{fd.food.food_image.url}}" alt="" 
+                class="img-fluid" height="150" width="150">
+               </div>
+               <div class="col-sm-7">
+                   <p>Food Title: {{fd.food.food_title}}</p>
+                   <p>Quantity: {{fd.quantity}}</p>
+                   <p>Price: {{fd.total_cost}}</p>
+               </div>
+               <div class="col-sm-3 fw-bold">
+                <p>Order Status : {{fd.status}}</p>
+                {% if fd.status == 'Accepted' %}
+                <div class="progress">
+                    <div class="progress-bar" style="width: 20%;"
+                    aria-valuenow="20" aria-valuemax="100">
+                    </div>
+                </div>
+                {% endif %}
+                {% if fd.status == 'Packed' %}
+                <div class="progress">
+                    <div class="progress-bar bg-info" style="width: 40%;"
+                    aria-valuenow="20" aria-valuemax="100">
+                    </div>
+                </div>
+                {% endif %}
+                {% if fd.status == 'On The Way' %}
+                <div class="progress">
+                    <div class="progress-bar bg-warning" style="width: 70%;"
+                    aria-valuenow="20" aria-valuemax="100">
+                    </div>
+                </div>
+                {% endif %}
+                {% if fd.status == 'Delivered' %}
+                <div class="progress">
+                    <div class="progress-bar bg-success" style="width: 100%;"
+                    aria-valuenow="20" aria-valuemax="100">
+                    </div>
+                </div>
+                {% endif %}
+               </div>
+
+           </div>
+           {% endfor %}
+       </div>
+
+   </div> 
+</div>
+{% endblock main-content %}

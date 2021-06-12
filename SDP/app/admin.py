@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Restaurant,Bannerslide,Customer,ResFood
+from .models import Restaurant,Bannerslide,Customer,ResFood,Cart,OrderPlaced
 # Register your models here.
 
 
@@ -21,3 +21,9 @@ class CustomerAdmin(admin.ModelAdmin):
     list_display=['id','name','locality','zipcode','upazila','city']
 
 admin.site.register(ResFood)
+
+
+admin.site.register(Cart)
+
+admin.site.register(OrderPlaced)
+

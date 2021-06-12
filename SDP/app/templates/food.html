@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block main-content %}
+
+<!-- 1nd Product Slider -->
+<div class="m-3">
+    <h2 class="doit">All Biryani</h2>
+    <!-- Slider 1 -->
+    <div class="owl-carousel" id="slider1">
+      {% for fb in B %}
+      <a href="{% url 'product-detail' fb.id %}" class="btn">
+      <div class="item rounded"><img src="{{fb.food_image.url}}" alt="" height="200px"><span class="fw-bold">{{fb.food_title}}</span><br><span class="fs-5">{{fb.food_price}}</span></div>
+     </a>
+      {% endfor %}
+    </div>
+   </div>
+  <!-- End 1nd Product Slider -->
+  <div class="m-3">
+    <h2 class="doit">All Fish Fry</h2>
+    <!-- Slider 1 -->
+    <div class="owl-carousel" id="slider1">
+      {% for fb in Fi %}
+      <a href="{% url 'product-detail' fb.id %}" class="btn">
+      <div class="item rounded"><img src="{{fb.food_image.url}}" alt="" height="200px"><span class="fw-bold">{{fb.food_title}}</span><br><span class="fs-5">{{fb.food_price}}</span></div>
+     </a>
+      {% endfor %}
+    </div>
+   </div>
+  <!-- End 1nd Product Slider -->
+  <div class="m-3">
+    <h2 class="doit">All Chiken</h2>
+    <!-- Slider 1 -->
+    <div class="owl-carousel" id="slider1">
+      {% for fb in Ch %}
+      <a href="{% url 'product-detail' fb.id %}" class="btn">
+      <div class="item rounded"><img src="{{fb.food_image.url}}" alt="" height="200px"><span class="fw-bold">{{fb.food_title}}</span><br><span class="fs-5">{{fb.food_price}}</span></div>
+     </a>
+      {% endfor %}
+    </div>
+   </div>
+  <!-- End 1nd Product Slider -->
+    <!-- End 1nd Product Slider -->
+    <div class="m-3">
+        <h2 class="doit">All Chamuca</h2>
+        <!-- Slider 1 -->
+        <div class="owl-carousel" id="slider1">
+          {% for fb in C %}
+          <a href="{% url 'product-detail' fb.id %}" class="btn">
+          <div class="item rounded"><img src="{{fb.food_image.url}}" alt="" height="200px"><span class="fw-bold">{{fb.food_title}}</span><br><span class="fs-5">{{fb.food_price}}</span></div>
+         </a>
+          {% endfor %}
+        </div>
+       </div>
+      <!-- End 1nd Product Slider -->
+{% endblock main-content %}
