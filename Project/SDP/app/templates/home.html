@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+
+{% block banner_slider %}
+<!--Banner Slider-->
+ <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img  src="{% static 'images/banner/1.jpg' %}" class="d-block w-100" height="1000px" alt="..."> 
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'images/banner/2.jpg' %}" class="d-block w-100" height="1000px" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'images/banner/3.jpg' %}" class="d-block w-100" height="1000px" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'images/banner/4.jpg' %}" class="d-block w-100" height="1000px" alt="banner">
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </a>
+</div>
+<!-- End Banner Slider -->
+{% endblock banner_slider %}
+
+{% block main-content %}
+<div class="container-fluid bg-light">
+  <!-- 1st Food Slider -->
+<div class="m-3">
+  <h2 class="">Endocrinologists</h2>
+  <!-- Slider 1 -->
+  <div class="owl-carousel" id="slider1">
+    <div class="item"><img src="{% static 'images/img/4.jpg' %}" alt="" height="200px"><span class="fw-bold">Habiber rahaman</span><br><strong class="fs-5 text-danger">Fee.500</strong><br><span class="fs-5">Dhaka Medical collage</span></div>
+    <div class="item"><img src="{% static 'images/img/1.jpg' %}" alt="" height="200px"><span class="fw-bold">Sakib all mahamud</span><br><strong class="fs-5 text-danger">Fee.500</strong><br><span class="fs-5">Dhaka Medical collage</span><br></div>
+    <div class="item"><img src="{% static 'images/img/2.jpg' %}" alt="" height="200px"><span class="fw-bold">Tarakul islam</span><br><strong class="fs-5 text-danger">Fee.500</strong><br><span class="fs-5">Dhaka Medical collage</span></div>
+    <div class="item"><img src="{% static 'images/img/3.jpg' %}" alt="" height="200px"><span class="fw-bold">other</span><br><strong class="fs-5 text-danger">Fee.500</strong><br><span class="fs-5">Dhaka Medical collage</span></div>
+  </div>
+ </div>
+ <!-- End 1st Food Slider -->
+ 
+ <!-- 2nd Food Slider -->
+ <div class="mx-3">
+  <h2>Cardiologists</h2>
+  <!-- Slider 2 -->
+  <div class="owl-carousel" id="slider2">
+    <div class="item"><img src="{% static 'images/img/4.jpg' %}" alt="" height="200px"><span class="fw-bold">Habiber rahaman</span><br><strong class="fs-5 text-danger">Fee.500</strong><br><span class="fs-5">Dhaka Medical collage</span></div>
+    <div class="item"><img src="{% static 'images/img/1.jpg' %}" alt="" height="200px"><span class="fw-bold">Sakib all mahamud</span><br><strong class="fs-5 text-danger">Fee.500</strong><br><span class="fs-5">Dhaka Medical collage</span><br></div>
+    <div class="item"><img src="{% static 'images/img/2.jpg' %}" alt="" height="200px"><span class="fw-bold">Tarakul islam</span><br><strong class="fs-5 text-danger">Fee.500</strong><br><span class="fs-5">Dhaka Medical collage</span></div>
+    <div class="item"><img src="{% static 'images/img/3.jpg' %}" alt="" height="200px"><span class="fw-bold">other</span><br><strong class="fs-5 text-danger">Fee.500</strong><br><span class="fs-5">Dhaka Medical collage</span></div>
+  </div>
+ </div>
+ <!-- End 2nd Food Slider -->
+</div>
+{% endblock main-content %}
+
+
+{% block doctor %}
+<!-- 2nd Food Slider -->
+<div class="mx-3">
+  <h2>Neurologists</h2>
+  <!-- Slider 2 -->
+  <div class="owl-carousel" id="slider2">
+    <div class="item"><img src="{% static 'images/img/1.jpg' %}" alt="" height="200px"><span class="fw-bold">Habiber rahaman</span><br><strong class="fs-5 text-danger">Fee.500</strong><br><span class="fs-5">Dhaka Medical collage</span></div>
+    <div class="item"><img src="{% static 'images/img/4.jpg' %}" alt="" height="200px"><span class="fw-bold">Sakib all mahamud</span><br><strong class="fs-5 text-danger">Fee.500</strong><br><span class="fs-5">Dhaka Medical collage</span><br></div>
+    <div class="item"><img src="{% static 'images/img/2.jpg' %}" alt="" height="200px"><span class="fw-bold">Tarakul islam</span><br><strong class="fs-5 text-danger">Fee.500</strong><br><span class="fs-5">Dhaka Medical collage</span></div>
+    <div class="item"><img src="{% static 'images/img/3.jpg' %}" alt="" height="200px"><span class="fw-bold">other</span><br><strong class="fs-5 text-danger">Fee.500</strong><br><span class="fs-5">Dhaka Medical collage</span></div>
+  </div>
+ </div>
+{% endblock doctor %}
+

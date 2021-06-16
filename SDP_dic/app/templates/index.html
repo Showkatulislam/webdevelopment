@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+  <div class="row my-3">
+   <div class="col-sm-6 offset-sm-3">
+    <hr>
+      <h1 class="alert alert-info">Dictionary</h1>
+      <form id="search-form" class="d-flex" method="POST">
+        {% csrf_token %}
+          <input class="form-control me-2" name="word"  type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+     </div>
+    </form>
+   </div>
+  </div>
+{% endblock content %}

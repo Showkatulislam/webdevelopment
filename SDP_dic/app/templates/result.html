@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block scripts %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+{% endblock scripts %}
+{% block content %}
+<div class="card">
+{% if word %}
+{% for w in word %}
+<div class="card text-center alert alert-info" style="width: 70rem; height:30rem;">
+<div class="row  p-2 mb-5 bg-info">
+   <div class="col text-center"><h1>{{w.Word}}</h1></div>
+</div>
+ <table border="3px solid" class="text-primary fw-bold">
+    <tr>
+        <td><h4>{{w.Word}}</h4></td>
+        <td><h4>{{w.Bangli_word}}</h4></td>
+    </tr>
+    <tr>
+        <td><h4>{{w.Word}}</h4></td>
+        <td><h4>{{w.Arobi_word}}</h4></td>
+    </tr>
+    <tr>
+        <td><h4>{{w.Word}}</h4></td>
+        <td><h4>{{w.Description}}</h4></td>
+    </tr>
+ </table>
+</div>       
+{% endfor %}
+{% else %}
+<h4>Not Available</h4>
+{% endif  %}
+</div>
+{% endblock content %}

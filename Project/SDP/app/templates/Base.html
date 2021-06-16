@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <!--Owl Carousel CSS-->
+        <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    
+        <!--FontAwesome CSS-->
+        <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    
+        <!--Custom CSS-->
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+    
+        <title>SDP-1 Project | {% block title %} {% endblock title %} </title>
+      </head>
+      <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-info p-3 ">
+            <div class="container">
+              <a class="navbar-brand" href="/"><img src="{% static 'images/img/logo.jpg' %}" alt="" style="width: 70px;"></a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link fw-bold active" aria-current="page" href="/">Home</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle  fw-bold" href="#" id="electronicsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Symptom
+                    </a>
+                    <ul class="dropdown-menu bg-light" aria-labelledby="electronicsDropdown">
+                      <li><a class="dropdown-item " href="#">Symptom</a></li>
+                      <li><a class="dropdown-item" href="#">Symptom</a></li>
+                      <li><a class="dropdown-item" href="#">Symptom</a></li>
+                      <li><a class="dropdown-item" href="#">Symptom</a></li>
+                      <li><a class="dropdown-item mr-3" href="#">Symptom</a></li>
+                    </ul>
+                  </li>
+                </ul>
+                <form class="d-flex">
+                  <input class="form-control me-2" type="search" placeholder="Search Hospital" aria-label="Search">
+                  <button class="btn btn-info" type="submit">Search</button>
+                </form>
+                <div>
+                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item dropdown mx-2">
+                     <a class="nav-link dropdown-toggle  btn btn-info fw-bold" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                       {{request.user}}
+                     </a>
+                     <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                       <li><a class="dropdown-item" href="#">Profile</a></li>
+                       <li><a class="dropdown-item" href="#">Prescription</a></li>
+                       <li><a class="dropdown-item" href="#">Change Password</a></li>
+                       <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                     </ul>
+                   </li>
+                   <li class="nav-item mx-2">
+                    <a href="#" class="nav-link "><span class="badge bg-danger">1</span><i class="fas fa-hospital-user"></i></a>
+                   </li>
+                   <li class="nav-item mx-2">
+                    <a href="{% url 'login' %}" class="nav-link  fw-bold">Login</a>
+                   </li>
+                   <li class="nav-item mx-2">
+                    <a href="{% url 'registation' %}" class="nav-link  fw-bold">Registration</a>
+                   </li>
+                 </ul>
+                </div>
+              </div>
+            </div>
+           </nav>
+        {% block banner_slider %} {% endblock banner_slider %}
+        {% block main-content %} {% endblock main-content %}
+        {% block contact-content %} {% endblock contact-content %}
+        {% block doctor %} {% endblock doctor %}
+        {% block doctor1 %} {% endblock doctor1 %}
+        <footer class="container-fluid bg-dark text-center p-2 mt-5">
+          <div class="row text-white">
+              <div class="col-lg-6">
+                <small class="text-white">Copyright &copy; 2021 team-13 </small>
+              </div>
+              <div class="col-lg-6 text-center   text-lg-right">
+                  <a href="#"><i class="fab fa-facebook fa-2x"></i></a>
+                  <a href="#"><i class="fab fa-youtube fa-2x"></i></a>
+                  <a href="#"><i class="fab fa-instagram fa-2x"></i></a>
+                  <a href="#"><i class="fab fa-twitter fa-2x"></i></a>
+              </div>
+          </div>
+      </footer>
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/all.min.js' %}"></script>
+    <script src="{% static 'js/myscript.js' %}"></script>
+      </body>
+</html>

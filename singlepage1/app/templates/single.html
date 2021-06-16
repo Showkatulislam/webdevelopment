@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <script>
+        window.onpopstate=function(){
+            console.log(event.state.section);
+            showPage(event.state.section);
+        }
+        function showPage(section){
+            fetch(`/section/${section}`)
+            .then(response=>response.text())
+            .then(text=>{
+                console.log(text);
+                document.querySelector('#content').innerHTML=text;
+            });
+        }
+        document.addEventListener('DOMContentLoaded',function(){
+            document.querySelectorAll('button').forEach(button=>{
+                button.onclick=function(){      
+                    //showPage(this.dataset.section);
+                    //console.log(this.dataset.section)
+                    const section=this.dataset.section;
+                    history.pushState({'section':section},"",`section${section}`);
+                    showPage(section)
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+    <h1>Hello!</h1>
+    <button data-section="1">Section 1</button>
+    <button data-section="2">Section 2</button>
+    <button data-section="3">Section 3</button>
+    <div id="content">
+
+    </div>
+</body>
+</html>
